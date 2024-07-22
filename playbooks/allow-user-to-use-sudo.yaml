@@ -1,0 +1,9 @@
+---
+- name: Allow specific user to use sudo
+  hosts: ubuntu-servers
+  become: true
+  tasks:
+    - name: Adding user to sudoers file
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        line: "{{ sudo_user }} ALL=(ALL:ALL) ALL"

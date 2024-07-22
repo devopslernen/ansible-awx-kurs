@@ -1,0 +1,22 @@
+---
+- name: Activate automatic apt updates
+  hosts: ubuntu-servers
+  become: true
+
+  tasks:
+    - name: Install unattended-upgrades package
+      ansible.builtin.package:
+        name: unattended-upgrades
+        state: present
+
+    - name: Configure automatic updates
+      ansible.builtin.copy:
+        src: conf/20auto-upgrades
+        dest: /etc/apt/apt.conf.d/20auto-upgrades
+        mode: '0644'
+
+    - name: Ensure unattended-upgrades service is enabled and started
+      ansible.builtin.service:
+        name: unattended-upgrades
+        state: started
+        enabled: true

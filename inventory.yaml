@@ -1,0 +1,8 @@
+[debian-servers]
+debian-01.lan
+
+[rhel-servers]
+rhel-01.lan
+
+[ubuntu-servers]
+ubuntu-01.lan

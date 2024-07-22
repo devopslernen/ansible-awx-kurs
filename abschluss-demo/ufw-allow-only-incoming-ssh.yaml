@@ -1,0 +1,19 @@
+---
+- name: Ensure only incoming SSH is allowed through UFW Firewall
+  hosts: ubuntu-servers
+  become: true
+
+  tasks:
+    - name: Install ufw
+      ansible.builtin.package:
+        name: ufw
+        state: present
+
+    - name: Allow SSH through ufw
+      community.general.ufw:
+        rule: allow
+        port: ssh
+
+    - name: Enable UFW
+      community.general.ufw:
+        state: enabled

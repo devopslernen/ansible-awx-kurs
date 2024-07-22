@@ -1,0 +1,18 @@
+---
+- name: Install Standard CLI Tools
+  hosts: ubuntu-servers
+  become: true
+
+  tasks:
+    - name: Install standard CLI tools
+      ansible.builtin.package:
+        name:
+          - vim
+          - wget
+          - curl
+          - unzip
+          - git
+          - tmux
+          - htop
+          - tree
+        state: present

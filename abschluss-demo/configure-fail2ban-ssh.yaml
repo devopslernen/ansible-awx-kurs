@@ -1,0 +1,22 @@
+---
+- name: Configure Fail2Ban to Protect SSH
+  hosts: ubuntu-servers
+  become: true
+
+  tasks:
+    - name: Install Fail2ban
+      ansible.builtin.package:
+        name: fail2ban
+        state: present
+
+    - name: Copy Fail2ban SSH configuration
+      ansible.builtin.copy:
+        src: conf/jail.conf
+        dest: /etc/fail2ban/jail.local
+        mode: '0644'
+
+    - name: Ensure Fail2ban service is enabled and started
+      ansible.builtin.service:
+        name: fail2ban
+        state: started
+        enabled: true

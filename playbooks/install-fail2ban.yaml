@@ -1,0 +1,10 @@
+---
+- name: Ensure Fail2ban is installed
+  hosts: ubuntu-servers
+  become: true
+
+  tasks:
+    - name: Install Fail2ban
+      ansible.builtin.package:
+        name: fail2ban
+        state: present

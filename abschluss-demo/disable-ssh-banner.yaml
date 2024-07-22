@@ -1,0 +1,19 @@
+---
+- name: Disable SSH Banner
+  hosts: ubuntu-servers
+  become: true
+
+  tasks:
+    - name: Disable SSH Banner
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config.d/10-my-sshd-settings.conf
+        line: "DebianBanner no"
+        create: true
+        mode: '0644'
+      notify: Restart SSH
+
+  handlers:
+    - name: Restart SSH
+      ansible.builtin.service:
+        name: ssh
+        state: restarted
